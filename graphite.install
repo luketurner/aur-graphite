@@ -1,0 +1,24 @@
+
+pre_install() {
+    useradd --home /opt/graphite --shell /bin/false graphite
+    virtualenv2 --distribute --system-site-packages /opt/graphite
+    /opt/graphite/bin/pip-2.7 install carbon whisper graphite-web uwsgi Django tagging django-tagging simplejson http://cairographics.org/releases/py2cairo-1.8.10.tar.gz
+}
+
+post_install() {
+    chown graphite /opt/graphite -R
+    echo "Run Carbon with '/opt/graphite/bin/carbon-cache.py start'. "
+    echo "Run Graphite webserver with '/opt/graphite/bin/uwsgi --yaml /opt/graphite/conf/uwsgi-graphite.yaml'. "
+    echo "Also note that Graphite listens on port 2003 by default and this package configures the webserver to listen on port 81 by default."
+    echo "So, you might want to filter who can access those ports, for instance with iptables."
+}
+
+pre_upgrade() {
+}
+
+post_upgrade() {
+}
+
+post_remove() {
+    rm -r /opt/graphene
+}

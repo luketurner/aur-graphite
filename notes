@@ -1,0 +1,39 @@
+requires python2-virtualenv
+
+~~ ODDITIES 
+
+* Installs in virtualenv in /opt/graphene
+* Includes uwsgi server because I don't want to have to mess w/Apache
+
+~~ PORTS
+
+Open to UDP from any source: 8125 (statsd listener)
+Open to TCP from localhost only: 2003 (graphite listener)
+Open to TCP from approved hosts only: 81 (Graphite dashboard)
+
+~~ INSTALL
+
+useradd --home /opt/graphite --shell /bin/false graphite
+
+virtualenv --distribute --system-site-packages /opt/graphite
+
+/opt/graphite/bin/pip-2.7 install carbon whisper graphite-web uwsgi Django tagging NOTE SEE GRAPHITE.INSTALL FOR LATEST DEPS
+
+CREATE carbon.conf AND storage-schemas.conf
+CREATE THE uWSGI DJANGO INI FILE /opt/graphene/conf/uwsgi-graphite.yaml
+CREATE webapp/graphite/local_settings.py
+
+chown graphite /opt/graphite -R
+
+/opt/graphite/bin/python /opt/graphite/webapp/graphite/manage.py syncdb
+
+~~ RUNNING
+
+statsd
+rc.d start statsd
+
+Carbon
+/opt/graphite/bin/carbon-cache.py start
+
+uWSGI Server running Graphite
+/opt/graphite/bin/uwsgi --yaml /opt/graphite/conf/uwsgi-graphite.yaml
