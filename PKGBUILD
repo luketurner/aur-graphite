@@ -1,12 +1,12 @@
 # Maintainer: Luke Turner <contact[at]luketurner[dot]org>
-pkgname=graphite-full
+pkgname=graphite
 pkgver=0.9.10
 pkgrel=2
 pkgdesc="Graphite provides real-time graphing for monitoring purposes."
 url="http://www.graphite.wikidot.com"
 arch=('x86_64' 'i686')
 license=('Apache 2.0')
-depends=('python2-cairo' 'django' 'django-tagging' 'python-simplejson' 'uwsgi')
+depends=('python2-cairo' 'django' 'django-tagging' 'python-simplejson' 'uwsgi' 'twisted')
 optdepends=('statsd-git: feed data to Graphite' 'uwsgi: run Graphite server')
 makedepends=()
 conflicts=()

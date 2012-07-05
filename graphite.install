@@ -11,5 +11,5 @@ post_install() {
 }
 
 post_remove() {
-    rm -r /opt/graphene
+    userdel -r graphite
 }
