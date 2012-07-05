@@ -5,24 +5,30 @@ pkgrel=2
 pkgdesc="Graphite provides real-time graphing for monitoring purposes."
 url="http://www.graphite.wikidot.com"
 arch=('x86_64' 'i686')
-license=('GPLv3')
-depends=('cairo')
-optdepends=('statsd-git: feed data to Graphite')
-makedepends=('python2-virtualenv')
+license=('Apache 2.0')
+depends=('cairo' 'django' 'python2-pip' 'django-tagging' 'python-simplejson' 'uwsgi' 'py2cairo')
+optdepends=('statsd-git: feed data to Graphite' 'uwsgi: run Graphite server')
+makedepends=()
 conflicts=()
 replaces=()
 backup=()
 install='graphite.install'
-source=("uwsgi-graphite.yaml" "carbon.conf" "storage-schemas.conf" "local_settings.py")
-md5sums=('2e7a06b7ed606228d02531b348c0b1d9' 'd7fdde32aa572642439824b3716fb2b5' '5718857b020c83a11d2f515b30a43f44' '4217ca7f5f4e76fc0de266d81d20b5b1')
+source=("http://pypi.python.org/packages/source/w/whisper/whisper-0.9.8.tar.gz"     "http://pypi.python.org/packages/source/c/carbon/carbon-0.9.6.tar.gz"
+    "http://pypi.python.org/packages/source/g/graphite-web/graphite-web-0.9.10.tar.gz" 
+    "uwsgi-graphite.yaml" "carbon.conf" "storage-schemas.conf" "local_settings.py")
+md5sums=('c5f291bfd2d7da96b524b8423ffbdc68' 'e0959f15d151ee4476d8e433fcdcc734' 'b6d743a254d208874ceeff0a53e825c1' '2e7a06b7ed606228d02531b348c0b1d9' 'd7fdde32aa572642439824b3716fb2b5' '5718857b020c83a11d2f515b30a43f44' '4217ca7f5f4e76fc0de266d81d20b5b1')
 
 build() {
-    virtualenv2 --distribute --system-site-packages "$pkgdir/opt/graphite"
-    "$pkgdir/opt/graphite/bin/pip-2.7" install whisper uwsgi Django tagging django-tagging simplejson http://cairographics.org/releases/py2cairo-1.8.10.tar.gz carbon graphite-web --install-option="--prefix=$pkgdir/opt/graphite" --install-option="--install-lib=$pkgdir/opt/graphite/webapp"
+    cd $srcdir/carbon-0.9.6
+    python2 setup.py install --root $pkgdir
+    cd $srcdir/whisper-0.9.8
+    python2 setup.py install --root $pkgdir
+    cd $srcdir/graphite-web-0.9.10
+    python2 setup.py install --root $pkgdir
     install -D $srcdir/uwsgi-graphite.yaml $pkgdir/opt/graphite/conf/uwsgi-graphite.yaml
     install -D $srcdir/carbon.conf $pkgdir/opt/graphite/conf/carbon.conf
     install -D $srcdir/storage-schemas.conf $pkgdir/opt/graphite/conf/storage-schemas.conf
     install -D $srcdir/local_settings.py $pkgdir/opt/graphite/webapp/graphite/local_settings.py
 }
 
-# vim:set ts=2 sw=2 et:
+# vim:set ts=4 sw=2 et:

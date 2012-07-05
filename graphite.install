@@ -4,9 +4,8 @@ pre_install() {
 }
 
 post_install() {
-    chown graphite /opt/graphite -R
-    echo "Run Carbon with '/opt/graphite/bin/carbon-cache.py start'. "
-    echo "Run Graphite webserver with '/opt/graphite/bin/uwsgi --yaml /opt/graphite/conf/uwsgi-graphite.yaml'. "
+    chown -R graphite /opt/graphite
+    echo "Run Graphite webserver with 'uwsgi --yaml /opt/graphite/conf/uwsgi-graphite.yaml'. (requires uwsgi)"
     echo "Also note that Graphite listens on port 2003 by default and this package configures the webserver to listen on port 81 by default."
     echo "So, you might want to filter who can access those ports, for instance with iptables."
 }
