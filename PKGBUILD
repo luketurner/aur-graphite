@@ -1,5 +1,5 @@
 # Maintainer: Luke Turner <contact[at]luketurner[dot]org>
-pkgname=graphite
+pkgname=graphite-web
 pkgver=0.9.10
 pkgrel=2
 pkgdesc="Graphite provides real-time graphing for monitoring purposes."
