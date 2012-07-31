@@ -1,7 +1,7 @@
 # Maintainer: Luke Turner <contact[at]luketurner[dot]org>
 pkgname=graphite-web
 pkgver=0.9.10
-pkgrel=2
+pkgrel=3
 pkgdesc="Graphite provides real-time graphing for monitoring purposes."
 url="http://www.graphite.wikidot.com"
 arch=('x86_64' 'i686')
