@@ -6,7 +6,7 @@ daemon_name=carbon
 . /etc/rc.d/functions
 
 get_pid() {
-        echo `ps ax | grep [c]arbon-cache.py | awk '{ print $1; }';`
+        echo `ps ax | grep [c]arbon-cache.py | awk '{ print $1; }'`
 }
 
 case "$1" in
@@ -18,8 +18,7 @@ case "$1" in
                         [[ -f /var/run/$daemon_name.pid ]] &&
                                 rm -f /var/run/$daemon_name.pid
                 # RUN
-                python2 /opt/graphite/bin/carbon-cache.py start && \
-                #
+                python2 /opt/graphite/bin/carbon-cache.py start
                 if [[ $? -gt 0 ]]; then
                         stat_fail
                         exit 1
@@ -35,7 +34,7 @@ case "$1" in
                 ;;
 
         stop)
-                stat_busy "Stopping $daemon_name daemon"
+                stat_busy "Stopping $daemon_name"
                 PID=$(get_pid)
                 # KILL
                 [[ -n $PID ]] && kill $PID &> /dev/null

@@ -16,7 +16,7 @@ install='graphite.install'
 source=("http://pypi.python.org/packages/source/w/whisper/whisper-0.9.8.tar.gz"     "http://pypi.python.org/packages/source/c/carbon/carbon-0.9.6.tar.gz"
     "http://pypi.python.org/packages/source/g/graphite-web/graphite-web-0.9.10.tar.gz" 
     "uwsgi-graphite.ini" "carbon.conf" "storage-schemas.conf" "local_settings.py" "carbon.rc")
-md5sums=('c5f291bfd2d7da96b524b8423ffbdc68' 'e0959f15d151ee4476d8e433fcdcc734' 'b6d743a254d208874ceeff0a53e825c1' 'f8ef934481c8b98a54fb426542d75f46' 'd7fdde32aa572642439824b3716fb2b5' '5718857b020c83a11d2f515b30a43f44' '4217ca7f5f4e76fc0de266d81d20b5b1' 'fdbd8a1fe08f07f228a31c6acc112aec')
+md5sums=('c5f291bfd2d7da96b524b8423ffbdc68' 'e0959f15d151ee4476d8e433fcdcc734' 'b6d743a254d208874ceeff0a53e825c1' 'f8ef934481c8b98a54fb426542d75f46' 'd7fdde32aa572642439824b3716fb2b5' '5718857b020c83a11d2f515b30a43f44' '4217ca7f5f4e76fc0de266d81d20b5b1' '2bf01bf3322b5ed964f1277ba01420f7')
 
 build() {
     cd $srcdir/carbon-0.9.6
